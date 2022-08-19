@@ -1,4 +1,4 @@
-# MaraX Montior - Visualisation for the Lelit Mara X (V2) with an automatic Shot-Timer
+# MaraX Monitior - Visualisation for the Lelit Mara X (V2) with an automatic Shot-Timer
 Hello everyone! This project is for anyone who owns a Lelit Mara X (V2) espresso machine. When looking for a new espresso machine, one feature I always wanted was a shot timer. Usually the machines are beautifully designed so I didn't want to ruin the look by adding a $5 kitchen timer to the machine.
 So far so good. Now you are going to say : Dude the MaraX doesnt have a Shot-Timer?! Yes, you are right but the MaraX has a serial interface!
 As a developer and tinkerer a ready to use serial interface is more interessting then a ready to use Shot-Timer ;)
