@@ -123,11 +123,27 @@ void updateView()
   display.setTextSize(5);
   //Timer
   if (seconds > 3)
-    display.print(seconds > 9 ? seconds : "0" + String(seconds));
+  {
+    String actual = "0";
+    if ( seconds > 9)
+      actual = seconds;
+    else
+      actual+=String(seconds);
+    display.print(actual);
+  }
   else if (lastTimer > 3)
-    display.print(lastTimer > 9 ? lastTimer : "0" + String(lastTimer));
+  {
+    String last = "0";
+    if ( lastTimer > 9)
+      last = lastTimer;
+    else
+      last+=String(lastTimer);
+    display.print(last);
+  }
   else
+  {
     display.print("00");
+  }
   //Mode
   display.setTextSize(1);
   display.setCursor(120, 2);
