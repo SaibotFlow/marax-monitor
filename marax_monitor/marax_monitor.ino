@@ -122,20 +122,32 @@ void updateView()
   display.setCursor(65, 15);
   display.setTextSize(5);
   //Timer
-  if (seconds > 5)
-    display.print(seconds > 9 ? seconds : "0" + String(seconds));
+  if (seconds > 3)
+  {
+    String actual = "0";
+    if ( seconds > 9)
+      actual = seconds;
+    else
+      actual+=String(seconds);
+    display.print(actual);
+  }
+  else if (lastTimer > 3)
+  {
+    String last = "0";
+    if ( lastTimer > 9)
+      last = lastTimer;
+    else
+      last+=String(lastTimer);
+    display.print(last);
+  }
   else
+  {
     display.print("00");
+  }
   //Mode
   display.setTextSize(1);
   display.setCursor(120, 2);
   display.print(lastMaraData[0].substring(0, 1));
-  //LastTimer
-  if (lastTimer > 0)
-  {
-    display.setCursor(115, 57);
-    display.print(lastTimer);
-  }
   display.display();
 }
 
