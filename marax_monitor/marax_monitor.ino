@@ -124,20 +124,16 @@ void updateView()
   //Timer
   if (seconds > 3)
   {
-    String actual = "0";
-    if ( seconds > 9)
-      actual = seconds;
-    else
-      actual+=String(seconds);
+    String actual = String(seconds);
+    if (actual.length()< 2)
+      actual = "0" + actual;
     display.print(actual);
   }
   else if (lastTimer > 3)
   {
-    String last = "0";
-    if ( lastTimer > 9)
-      last = lastTimer;
-    else
-      last+=String(lastTimer);
+    String last = String(lastTimer);
+    if (last.length()< 2)
+      last = "0" + last;
     display.print(last);
   }
   else
