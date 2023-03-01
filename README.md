@@ -3,6 +3,9 @@ Hello everyone! This project is for anyone who owns a Lelit Mara X (V2) espresso
 So far so good. Now you are going to say : Dude the MaraX doesnt have a Shot-Timer?! Yes, you are right but the MaraX has a serial interface!
 As a developer and tinkerer a ready to use serial interface is more interessting then a ready to use Shot-Timer ;)
 
+If you like my project, please give me a star and if you want, you can also buy me a coffee :-)
+<a href="https://www.buymeacoffee.com/saibotFlow386" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
 ![Display](https://github.com/SaibotFlow/marax-monitor/blob/main/assets/DisplayInAction.png?raw=true)
  
 # Parts
