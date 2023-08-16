@@ -1,4 +1,7 @@
 # MaraX Monitior - Visualisation for the Lelit Mara X (V2) with an automatic Shot-Timer
+
+
+
 Hello everyone! This project is for anyone who owns a Lelit Mara X (V2) espresso machine. When looking for a new espresso machine, one feature I always wanted was a shot timer. Usually the machines are beautifully designed so I didn't want to ruin the look by adding a $5 kitchen timer to the machine.
 So far so good. Now you are going to say : Dude the MaraX doesnt have a Shot-Timer?! Yes, you are right but the MaraX has a serial interface!
 As a developer and tinkerer a ready to use serial interface is more interessting then a ready to use Shot-Timer ;)
@@ -9,15 +12,69 @@ If you like my project, please give me a star and if you want, you can also buy 
 
 ![Display](https://github.com/SaibotFlow/marax-monitor/blob/main/assets/DisplayInAction.png?raw=true)
  
+## Updates
+- New file include *marax_monitor_wemos_wifi.ino* included.
+- Supporting Wemos D1 Mini Pro (ESP8226) with WLAN.
+- Sending Push-Notification when machine is hot via Pushsafer-Service
+
+# How to use this repo?
+This repo should help you to implement your own solution. I implemented my personal solution, probably it fits to you. If not you can change the code yourself. I commented the code a bit to show what happens where.
+
+There are 2 Files
+- marax_monitor.ino
+- marax_monitor_wemos_wlan.ino
+
+ The *marax_monitor.ino* is my first solution. I used an Arduino Nano for that.
+ 
+ The *marax_monitor_wemo_wlan.ino* is a more smart solution. In that case smart means: It sends a push notification when the machine is ready (not  hot). For me the machine is ready when: 
+ 
+ `data.steamTemp == data.targetSteamTemp && data.hxTemp > 90 && initialPushSent == false`
+ 
+  I used a Wemos D1 Mini Pro - small board and WLAN out of the box. You could easily extend this solution e.g. adding a WebUi or pushing the data to a server. There are many ideas. 
+
+ ## Secret data
+ SSID, WLAN-Password and API-Key are sensitive data and should not be pushed in an open repository.
+ So I created a *.gitignore* which is ignoring the file **secrets.h** in the sketch-folder. In this file you can put your secrets like that:
+
+
+```
+ #include WLAN_SSID "SSID"
+ #inlcude WLAN_PASS "PASS"
+ #inlcude API_KEY "MyKey"
+```
+
+ ## Push Service
+ For sending push notifications I am using the PushSafer-Service. It is easy to use and I already had experience with it. 
+ But you could change your service as well. So you have to change the *sendPushSaferMessage* Method, the host and the port.
+ 
+ **Note**:
+ 
+ If you dont want to send any push notifications you can set
+ `bool initialPushSent` to `true` then the programm will not send any push notifications.
+ You can change *title*, *message*, *icon* etc. here:
+ ```
+  String pushTitle = "Lelit%20Mara%20X";
+  String pushMessage = "I%20am%20hot%20for%20you!";
+  String pushIcon= "62";
+```
+ 
+
 # Parts
 
-- Arduino Nano (You can use any other equivalent board)
+- Arduino Nano / Wemos D1 Mini Pro (You can use any other equivalent board)
 - Breadboard
 - Jumper-Wires
 - 0,96" SSD1306 OLED Display
 
 # Structure & Connections
+**Important**: If you use a Wemos or any ESP8266 board you have to connect:
+- **SCK/SCL** to **D1** 
+- **SDA** to **D2**
 
+Arudino is using A4 and A5 Pin
+- **SCK/SCL** to **A4**
+- **SDA** to **A5**
+- 
 ![Fritzing](https://github.com/SaibotFlow/marax-monitor/blob/main/assets/Schema.png?raw=true)
 
 # The Interface
@@ -26,8 +83,10 @@ The MaraX has a 6-PIN Connector for the serial interface on the bottom. We only 
  - **PIN3 Mara** to  **D6**
  - **PIN4 Mara** to **D5**
 
-RX Mara to TX Arudino
-TX Mara to RX Arduino
+*RX Mara to TX Board*
+
+*TX Mara to RX Board*
+
 You will receive the following data each ~400ms.
 
 ![enter image description here](https://github.com/SaibotFlow/marax-monitor/blob/main/assets/Bottom.png?raw=true)
@@ -58,12 +117,12 @@ Example Data: **C1.06,116,124,093,0840,1,0\n**
 
 
 # Display Wiring
-|Pin Display|Pin Arduino Nano|
+|Pin Display|Pin Board(Arduino/ESP8266|
 |--|--|
 | VIN | 3,3V or 5V |
 | GND| GND |
-| SCL| A5 |
-| SDA| A4 |
+| SCL| A5/D2 |
+| SDA| A4/D1 |
 
 The reset pin is 0x3D or 0x3C. You can recognize it by the solder joint on the back side
 
@@ -74,3 +133,8 @@ The reset pin is 0x3D or 0x3C. You can recognize it by the solder joint on the b
  - Adafruit_GFX.h
  - Adafruit_SSD1306.h
  - SoftwareSerial.h
+
+Additionaly for Wemos / Esp8266
+ - ArduinoHttpClient
+ - Esp8266WiFi
+ - SPI.h
