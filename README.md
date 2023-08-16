@@ -26,7 +26,7 @@ There are 2 Files
 
  The *marax_monitor.ino* is my first solution. I used an Arduino Nano for that.
  
- The *marax_monitor_wemo_wlan.ino* is a more smart solution. In that case smart means: It sends a push notification when the machine is ready (not  hot). For me the machine is ready when: 
+ The *marax_monitor_wemos_wlan.ino* is a more smart solution. In that case smart means: It sends a push notification when the machine is ready (not  hot). For me the machine is ready when: 
  
  `data.steamTemp == data.targetSteamTemp && data.hxTemp > 90 && initialPushSent == false`
  
